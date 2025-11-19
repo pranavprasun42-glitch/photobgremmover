@@ -2,7 +2,19 @@ from flask import Flask, render_template, request, send_file
 from rembg import remove
 import io
 
+from flask import Flask, request, send_file
+import os
+
 app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return "Background remover running!"
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
+
 
 @app.route("/")
 def index():
@@ -27,3 +39,4 @@ def remove_bg():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
