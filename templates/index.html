@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> PHOTO BACKGROUND REMOVER</title>
+    
+    <style>
+        /* Global page styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #3F51B5, #9C27B0, #E91E63);
+            background-size: 300% 300%;
+            animation: gradientBG 12s ease infinite;
+            color: #fff;
+        }
+
+        @keyframes gradientBG {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+
+        /* Top Hero Section */
+        .hero {
+            text-align: center;
+            padding: 90px 20px 40px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        /* Upload Section (Glassmorphism Box) */
+        .container {
+            max-width: 700px;
+            margin: 30px auto;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(12px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 0 25px rgba(0,0,0,0.25);
+        }
+
+        .upload-box {
+            border: 2px dashed rgba(255,255,255,0.6);
+            padding: 40px;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .upload-box:hover {
+            background: rgba(255,255,255,0.18);
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .btn {
+            margin-top: 25px;
+            padding: 14px 30px;
+            border: none;
+            border-radius: 10px;
+            background: #FFEB3B;
+            color: black;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #FDD835;
+        }
+
+        /* Loading spinner */
+        .spinner {
+            display: none;
+            margin: 20px auto;
+            border: 5px solid rgba(255,255,255,0.3);
+            border-top: 5px solid #fff;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 60px;
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+    </style>
+
+    <script>
+        function triggerUpload() {
+            document.getElementById("fileInput").click();
+        }
+
+        function showFileName(event) {
+            const fileName = event.target.files[0]?.name;
+            if (fileName) {
+                document.getElementById("fileLabel").innerText = "Selected: " + fileName;
+            }
+        }
+
+        function showLoader() {
+            document.getElementById("loader").style.display = "block";
+        }
+    </script>
+</head>
+
+<body>
+
+    <div class="hero">
+        <h1>🔥 PHOTO BACKGROUND REMOVER</h1>
+        <p>Remove image backgrounds instantly Free, fast, and simple.</p>
+    </div>
+
+    <div class="container">
+        <form action="/remove-bg" method="POST" enctype="multipart/form-data" onsubmit="showLoader()">
+
+            <div class="upload-box" onclick="triggerUpload()">
+                <label id="fileLabel">Click here to upload an image</label>
+                <input type="file" id="fileInput" name="image" accept="image/*" required onchange="showFileName(event)">
+            </div>
+
+          <button class="btn" type="submit">✨ Remove Background</button>
+
+<p style="margin-top:20px; opacity:0.8;">
+    After removing background, your image will automatically download.
+</p>
+
+
+            <div id="loader" class="spinner"></div>
+        </form>
+    </div>
+
+    <footer>
+        © 2025 AI Background Remover — Designed with ❤️  
+    </footer>
+
+</body>
+</html>
